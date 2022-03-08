@@ -36,6 +36,14 @@
     }
   }
 
+  function bookReaded(item) {
+    if (item == false) {
+      item = true;
+    } else {
+      item = false;
+    }
+  }
+
   function removeBook(index) {
     data.splice(index, 1);
     data = data;
@@ -80,12 +88,6 @@
 
 <div class="content">
   <Content />
-  <div class="infoContainer">
-    <p>Title</p>
-    <p>Author</p>
-    <p>Pages</p>
-    <p>Readed</p>
-  </div>
   <div class="booksContainer">
     {#each data as book, index}
       <div class="books">
@@ -93,9 +95,9 @@
         <p class="bookAttribute">{book.author}</p>
         <p class="bookAttribute">{book.pages}</p>
         {#if book.readed == true}
-          <p class="bookAttribute">Yes</p>
+          <p on:click={bookReaded(book.readed)} class="bookAttribute">Yes</p>
         {:else}
-          <p class="bookAttribute">No</p>
+          <p on:click={bookReaded(book.readed)} class="bookAttribute">No</p>
         {/if}
         <p on:click={() => removeBook(index)} class="bookAttribute remove">X</p>
       </div>
@@ -157,26 +159,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70vw;
-    border: 1px solid black;
+    width: 100%;
   }
   .bookAttribute {
-    margin: 5px 50px;
+    margin: 15px 45px;
     width: 10vw;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .infoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    width: 70vw;
-  }
-  .infoContainer > p {
-    margin: 5px 100px;
-    font-weight: 700;
   }
   .remove {
     color: red;
